@@ -50,7 +50,7 @@ def movePlayer():
 
     while True:
         try:
-            if keyboard.is_pressed("left") & counter < 1:
+            if keyboard.is_pressed("left"):
                 if counter < 1:
                     os.system("cls")
                     left_arrow()
