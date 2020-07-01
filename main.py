@@ -10,18 +10,34 @@ FOOD = "A"
 gameBoard = []
 cols = 0
 dim = (0, 0)
-currPos = [0]
+currPos = 0
 foodCurrPos = 0
 pastPos = 0
 counter = 0
-numEaten = 0
+score = 0
 
 
-def makeBody():
-    if numEaten > 0:
-        pass
+'''def makeBody():
+    global currPos
+    global pastPos
+    global dim
+
+    if foodEaten():
+        if currPos - pastPos == 1:
+            right_arrow()
+        elif currPos - pastPos == -1:
+            left_arrow()
+        elif currPos - pastPos == dim[1]:
+            down_arrow()
+        elif currPos - pastPos == -dim[1]:
+            up_arrow()
+
     else:
-        pass
+        pass'''
+
+
+def foo():
+    pass
 
 
 def foodSpawn():
@@ -56,7 +72,9 @@ def makeGameBoard(arr, dimensions):
 
 
 def printGameBoard(arr):
+    global score
     count = 0
+    print(f"\n###### Score: {score} ######\n")
     for i in arr:
         count += 1
         if count % cols != 0:
@@ -86,7 +104,6 @@ def movePlayer():
     global pastPos
     global counter
 
-    # const_vel()
     try:
         if keyboard.is_pressed("left"):
             if counter < 1:
@@ -174,30 +191,24 @@ def down_arrow():
     printGameBoard(gameBoard)
 
 
-def const_vel():
-    if currPos[0] % 10 == 0:
-        num = random.randint(0, 2)
-        if num == 0:
-            try:
-                time.sleep(0.3)
+'''def const_vel():
+    while True:
+        if keyboard.KEY_DOWN == "down":
+            randNum = random.randint(1, 4)
+            if randNum == 1:
+                time.sleep(1)
                 up_arrow()
-            except:
-                pass
-
-        elif num == 1:
-            pass
+            elif randNum == 2:
+                time.sleep(1)
+                down_arrow()
+            elif randNum == 3:
+                time.sleep(1)
+                left_arrow()
+            elif randNum == 4:
+                time.sleep(1)
+                right_arrow()
         else:
-            pass
-    else:
-        num = random.randint(0, 3)
-        if num == 0:
-            pass
-        elif num == 1:
-            pass
-        elif num == 2:
-            pass
-        else:
-            pass
+            break'''
 
 
 if __name__ == "__main__":
@@ -205,6 +216,7 @@ if __name__ == "__main__":
     printPlayer(gameBoard)
     printGameBoard(gameBoard)
     flag = False
+
     while True:
         if keyboard.is_pressed("q"):
             break
@@ -214,6 +226,5 @@ if __name__ == "__main__":
                 flag = True
             if foodEaten():
                 foodSpawn()
-                numEaten += 1
-                print(numEaten)
+                score += 1
             movePlayer()
